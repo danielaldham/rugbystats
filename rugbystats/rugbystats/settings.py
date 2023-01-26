@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'stats',
 ]
 
+AUTH_USER_MODEL = 'stats.MyUser'
 
 
 MIDDLEWARE = [
