@@ -25,7 +25,7 @@ class Position(models.Model):
 class Player(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    positions = models.ManyToManyField(Position)
+    position = models.ManyToManyField(Position)
     
     def __str__(self):
         return self.first_name + " " + self.last_name
@@ -59,7 +59,7 @@ class Match(models.Model):
         return f'{self.home_team} vs {self.away_team}'
 
 
-class MatchStatistic(models.Model):
+class PlayerStatistic(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     tries = models.IntegerField(default=0)

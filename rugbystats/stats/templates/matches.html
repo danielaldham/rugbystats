@@ -19,7 +19,7 @@
           <td>{{ match.away_team }}</td>
           <td>{{ match.date }}</td>
           <td>{{ match.home_score }} - {{ match.away_score }}</td>
-          <td><a href="{% url 'match_statistics' match.id %}">View statistics</a></td>
+          <td><a href="{% url 'player_statistics' match.id %}">View statistics</a></td>
         </tr>
       {% endfor %}
     </tbody>

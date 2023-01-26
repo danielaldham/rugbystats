@@ -7,9 +7,9 @@ from django.db.models import Q
 
 from django import forms
 
-from .forms import AddMatchForm, AddPlayerForm, MatchStatisticForm
+from .forms import AddMatchForm, AddPlayerForm
 
-from .models import MyUser, Match, Team, Player, MatchStatistic
+from .models import MyUser, Match, Team, Player, PlayerStatistic
 
 # Create your views here.
 class MyRegistrationForm(UserCreationForm):
@@ -105,7 +105,7 @@ def join_team(request):
             messages.error(request, 'Invalid invite code. Please try again.')
     return render(request, 'join_team.html')
 
-def match_statistics(request, match_id):
+def player_statistics(request, match_id):
     match = Match.objects.get(id=match_id)
-    statistics = MatchStatistic.objects.filter(match=match)
-    return render(request, 'match_statistics.html', {'statistics': statistics, 'match': match})
+    statistics = PlayerStatistic.objects.filter(match=match)
+    return render(request, 'player_statistics.html', {'statistics': statistics, 'match': match})
