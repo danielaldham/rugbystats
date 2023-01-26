@@ -12,7 +12,6 @@ class Player(models.Model):
 
 class Team(models.Model):
     name = models.CharField(max_length=30)
-    pass
 
 class MyUser(AbstractUser):
     coach = models.BooleanField(default=False)
@@ -22,7 +21,8 @@ class Match(models.Model):
     home_team = models.CharField(max_length=100)
     away_team = models.CharField(max_length=100)
     date = models.DateField()
-    pass
+    home_score = models.IntegerField(default=0)
+    away_score = models.IntegerField(default=0)
 
 class MatchStatistic(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
