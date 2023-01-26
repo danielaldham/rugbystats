@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.db.models import Q
+
 
 from django import forms
 
@@ -34,13 +36,10 @@ def index(request):
     return render(request, 'index.html')
 
 def matches(request):
-    if request.user.is_authenticated:
-        team = request.user.team
-        matches = Match.objects.filter(home_team=team) | Match.objects.filter(away_team=team)
-        context = {'matches': matches}
-        return render(request, 'matches.html', context)
-    else:
-        return render(request, 'matches.html')
+    user_team = request.user.team
+    matches = Match.objects.filter(Q(home_team=user_team) | Q(away_team=user_team))
+    return render(request, 'matches.html', {'matches': matches})
+
 
 def squad_stats(request):
     team = Team.objects.get(user=request.user)
