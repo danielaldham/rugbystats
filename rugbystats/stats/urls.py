@@ -11,5 +11,5 @@ urlpatterns = [
     path('players/', views.add_players, name='add_players'),
     path('add_match/', views.add_match, name='add_match'),
     path('join/', views.join_team, name='join'),
-    path('match_stats/<int:match_id>/', views.player_statistics, name='match_statistics'),
+    path('match_stats/<int:match_id>/', views.player_statistics, name='player_statistics'),
 ]
