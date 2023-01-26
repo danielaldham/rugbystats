@@ -4,10 +4,28 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
+
+class Position(models.Model):
+    name = models.CharField(max_length=20, choices=[
+        ('prop', 'Prop'),
+        ('hooker', 'Hooker'),
+        ('lock', 'Lock'),
+        ('flanker', 'Flanker'),
+        ('no8', 'No. 8'),
+        ('scrum_half', 'Scrum Half'),
+        ('fly_half', 'Fly Half'),
+        ('centre', 'Centre'),
+        ('wing', 'Wing'),
+        ('full_back', 'Full Back')
+    ])
+    
+    def __str__(self):
+        return self.name
+
 class Player(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    position = models.CharField(max_length=20)
+    positions = models.ManyToManyField(Position)
     
     def __str__(self):
         return self.first_name + " " + self.last_name
