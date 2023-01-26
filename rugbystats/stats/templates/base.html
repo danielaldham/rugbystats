@@ -25,12 +25,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'squad' %}">Squad Statistics</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'join' %}">Join Team</a>
+                </li>
                 {% if user.is_authenticated and user.is_coach %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'add_players' %}">Add Players</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'add_matches' %}">Add Matches</a>
+                        <a class="nav-link" href="{% url 'add_match' %}">Add Match</a>
                     </li>
                 {% endif %}
             </ul>

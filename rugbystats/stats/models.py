@@ -8,14 +8,24 @@ class Player(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     position = models.CharField(max_length=20)
-    pass
+    
+    def __str__(self):
+        return self.first_name + " " + self.last_name
 
 class Team(models.Model):
     name = models.CharField(max_length=30)
+    invite_code = models.CharField(max_length=10, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 class MyUser(AbstractUser):
     coach = models.BooleanField(default=False)
     team = models.ForeignKey(Team, on_delete=models.CASCADE, null=True, blank=True)
+
+    @property
+    def is_coach(self):
+        return self.coach
 
 class Match(models.Model):
     home_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='home_matches')
