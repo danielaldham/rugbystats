@@ -3,33 +3,38 @@
 {% block content %}
 
 <table class="table">
-    <thead>
-        <tr>
-          <th>Name</th>
-          <th>Tries</th>
-          <th>Conversions</th>
-          <th>Penalties</th>
-          <th>Started</th>
-          <th>Yellow Cards</th>
-          <th>Red Cards</th>
-          <th>Tackles Made</th>
-          <th>Tackles Missed</th>
-        </tr>
-      </thead>
+  <thead>
+      <tr>
+        <th>Name</th>
+        <th>Started</th>
+        <th>Tackles Made</th>
+        <th>Tackles Missed</th>
+        <th>Rucks hit</th>
+        <th>Passes</th>
+        <th>Carries</th>
+        <th>Tries</th>
+        <th>Conversions</th>
+        <th>Penalties</th>
+        <th>Yellow Cards</th>
+        <th>Red Cards</th>
+      </tr>
+    </thead>
 {% for stat in statistics %}
-    <tr>
-        <td>{{ stat.player.full_name }}</td>
-        <td>{{ stat.tries }}</td>
-        <td>{{ stat.conversions }}</td>
-        <td>{{ stat.penalties }}</td>
-        <td>{{ stat.started }}</td>
-        <td>{{ stat.yellow_cards }}</td>
-        <td>{{ stat.red_cards }}</td>
-        <td>{{ stat.tackles_made }}</td>
-        <td>{{ stat.tackles_missed }}</td>
-    </tr>
+  <tr>
+      <td>{{ stat.player.full_name }}</td>
+      <td>{{ stat.started }}</td>
+      <td>{{ stat.tackles_made }}</td>
+      <td>{{ stat.tackles_missed }}</td>
+      <td>{{ stat.rucks_hit }}</td>
+      <td>{{ stat.passes }}</td>
+      <td>{{ stat.carries }}</td>
+      <td>{{ stat.tries }}</td>
+      <td>{{ stat.conversions }}</td>
+      <td>{{ stat.penalties }}</td>
+      <td>{{ stat.yellow_cards }}</td>
+      <td>{{ stat.red_cards }}</td>
+  </tr>
 {% endfor %}
-
 </table>
 {% endblock %}
 
