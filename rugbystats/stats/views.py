@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -7,9 +7,9 @@ from django.db.models import Q
 
 from django import forms
 
-from .forms import AddMatchForm, AddPlayerForm
+from .forms import AddMatchForm, AddPlayerForm, MatchStatisticForm
 
-from .models import MyUser, Match, Team, Player
+from .models import MyUser, Match, Team, Player, MatchStatistic
 
 # Create your views here.
 class MyRegistrationForm(UserCreationForm):
@@ -104,3 +104,8 @@ def join_team(request):
         except Team.DoesNotExist:
             messages.error(request, 'Invalid invite code. Please try again.')
     return render(request, 'join_team.html')
+
+def match_statistics(request, match_id):
+    match = Match.objects.get(id=match_id)
+    statistics = MatchStatistic.objects.filter(match=match)
+    return render(request, 'match_statistics.html', {'statistics': statistics, 'match': match})

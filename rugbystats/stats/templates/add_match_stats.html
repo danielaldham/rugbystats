@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add Match Stats</h1>
+<form method="POST" action="{% url 'add_match_statistics' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+    <input type="submit" value="Add Match Statistics" class="btn btn-primary">
+</form>
+
+
+{% endblock %}

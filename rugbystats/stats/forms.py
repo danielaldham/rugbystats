@@ -1,5 +1,5 @@
 from django import forms
-from .models import Player, Match
+from .models import Player, Match, MatchStatistic
 
 class AddPlayerForm(forms.ModelForm):
     class Meta:
@@ -12,3 +12,8 @@ class AddMatchForm(forms.ModelForm):
         model = Match
         fields = ['home_team', 'away_team', 'date', 'home_score', 'away_score']
 
+
+class MatchStatisticForm(forms.ModelForm):
+    class Meta:
+        model = MatchStatistic
+        fields = ['match', 'player', 'tries', 'conversions', 'penalties', 'started', 'yellow_cards', 'red_cards', 'tackles_made', 'tackles_missed']

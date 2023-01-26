@@ -12,6 +12,9 @@ class Player(models.Model):
     def __str__(self):
         return self.first_name + " " + self.last_name
 
+    def full_name(self):
+        return self.first_name + " " + self.last_name
+
 class Team(models.Model):
     name = models.CharField(max_length=30)
     invite_code = models.CharField(max_length=10, null=True, blank=True)
@@ -34,6 +37,9 @@ class Match(models.Model):
     home_score = models.IntegerField(default=0)
     away_score = models.IntegerField(default=0)
 
+    def __str__(self):
+        return f'{self.home_team} vs {self.away_team}'
+
 
 class MatchStatistic(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
@@ -44,3 +50,5 @@ class MatchStatistic(models.Model):
     started = models.BooleanField(default=False)
     yellow_cards = models.IntegerField(default=0)
     red_cards = models.IntegerField(default=0)
+    tackles_made = models.IntegerField(default=0)
+    tackles_missed = models.IntegerField(default=0)
