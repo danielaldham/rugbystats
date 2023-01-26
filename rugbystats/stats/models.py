@@ -62,14 +62,17 @@ class Match(models.Model):
 class PlayerStatistic(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    started = models.BooleanField(default=False)
     tackles_made = models.IntegerField(default=0)
     rucks_hit = models.IntegerField(default=0)
     passes = models.IntegerField(default=0)
     carries = models.IntegerField(default=0)
+    tackles_missed = models.IntegerField(default=0)
     tries = models.IntegerField(default=0)
     conversions = models.IntegerField(default=0)
     penalties = models.IntegerField(default=0)
-    started = models.BooleanField(default=False)
     yellow_cards = models.IntegerField(default=0)
     red_cards = models.IntegerField(default=0)
-    tackles_missed = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.player.full_name()} - {self.match.home_team} vs {self.match.away_team} on {self.match.date}'
