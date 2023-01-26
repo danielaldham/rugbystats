@@ -2,7 +2,9 @@
 
 {% block content %}
 
-<table class="table">
+
+
+<table class="table" id="player_statistics">
   <thead>
       <tr>
         <th>Name</th>
@@ -36,5 +38,17 @@
   </tr>
 {% endfor %}
 </table>
+
+<script>
+  $(document).ready( function () {
+      $('#player_statistics').DataTable({
+          "order": [[ 0, "asc" ]], 
+          "paging": false, 
+          "lengthChange": false, 
+          "searching": true
+      });
+});
+</script>
+
 {% endblock %}
 
