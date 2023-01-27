@@ -10,20 +10,47 @@
         {% else %}
             <p>You are a Player</p>
             <h3>Player Statistics</h3>
-            {% if player %}
-                <p>Average tackles made per game: {{ player.tackles_made }}</p>
-                <p>Average rucks hit per game: {{ player.rucks_hit }}</p>
-                <p>Average passes per game: {{ player.passes }}</p>
-                <p>Average carries per game: {{ player.carries }}</p>
-                <p>Average tackles missed per game: {{ player.tackles_missed }}</p>
-                <p>Average tries per game: {{ player.tries }}</p>
-                <p>Average conversions per game: {{ player.conversions }}</p>
-                <p>Average penalties per game: {{ player.penalties }}</p>
-                <p>Average yellow cards per game: {{ player.yellow_cards }}</p>
-                <p>Average red cards per game: {{ player.red_cards }}</p>
-            {% else %}
-                <p>No statistics found.</p>
-            {% endif %}
+            {% if statistics %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Match</th>
+                <th>Match Date</th>
+                <th>Tackles Made</th>
+                <th>Rucks Hit</th>
+                <th>Passes</th>
+                <th>Carries</th>
+                <th>Tackles Missed</th>
+                <th>Tries</th>
+                <th>Conversions</th>
+                <th>Penalties</th>
+                <th>Yellow Cards</th>
+                <th>Red Cards</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for statistic in statistics %}
+                <tr>
+                    <td>{{statistic.match.match_name}}</td>
+                    <td>{{ statistic.match.date }}</td>
+                    <td>{{ statistic.tackles_made }}</td>
+                    <td>{{ statistic.rucks_hit }}</td>
+                    <td>{{ statistic.passes }}</td>
+                    <td>{{ statistic.carries }}</td>
+                    <td>{{ statistic.tackles_missed }}</td>
+                    <td>{{ statistic.tries }}</td>
+                    <td>{{ statistic.conversions }}</td>
+                    <td>{{ statistic.penalties }}</td>
+                    <td>{{ statistic.yellow_cards }}</td>
+                    <td>{{ statistic.red_cards }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No statistics found.</p>
+{% endif %}
+
         {% endif %}
     {% else %}
         <p>You are not logged in.</p>

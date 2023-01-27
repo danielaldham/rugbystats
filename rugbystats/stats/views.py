@@ -34,11 +34,18 @@ def register(request):
 
 def index(request):
     if request.user.is_authenticated:
-        player = request.user.player
-        player_stats = PlayerStatistic.objects.filter(player=player)
-        return render(request, 'index.html', {'player': player, 'player_stats': player_stats})
+        try:
+            player = request.user.player
+            statistics = PlayerStatistic.objects.filter(player=player)
+            context = {'statistics': statistics}
+            return render(request, 'index.html', context)
+        except Player.DoesNotExist:
+            context = {'message': 'You are not associated with a player. Please contact your coach to connect your account.'}
+            return render(request, 'index.html', context)
     else:
         return render(request, 'index.html')
+
+
 
 def matches(request):
     user_team = request.user.team
