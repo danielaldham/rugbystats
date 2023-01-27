@@ -29,16 +29,8 @@ class Position(models.Model):
     def __str__(self):
         return self.name
 
-class MyUser(AbstractUser):
-    coach = models.BooleanField(default=False)
-    team = models.ForeignKey(Team, on_delete=models.CASCADE, null=True, blank=True)
-
-    @property
-    def is_coach(self):
-        return self.coach
 
 class Player(models.Model):
-    user = models.OneToOneField(MyUser, on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     position = models.ManyToManyField(Position)
@@ -48,6 +40,17 @@ class Player(models.Model):
 
     def full_name(self):
         return self.first_name + " " + self.last_name
+
+
+class MyUser(AbstractUser):
+    player = models.OneToOneField(Player, on_delete=models.CASCADE, null=True, blank=True)
+    coach = models.BooleanField(default=False)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, null=True, blank=True)
+
+    @property
+    def is_coach(self):
+        return self.coach
+
 
 
 
