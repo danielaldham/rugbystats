@@ -2,9 +2,8 @@
 
 {% block content %}
 <div class="container">
-    <h2>Welcome to the Rugby Club Tracker</h2>
+    <h2>Welcome to the Rugby Stats Homepage</h2>
     {% if user.is_authenticated %}
-        <p>You are logged in as {{ user.username }}</p>
         {% if user.coach %}
             <p>You are a Coach</p>
         {% else %}
@@ -26,6 +25,7 @@
                 <th>Penalties</th>
                 <th>Yellow Cards</th>
                 <th>Red Cards</th>
+                <th>Match Stats</th>
             </tr>
         </thead>
         <tbody>
@@ -43,6 +43,7 @@
                     <td>{{ statistic.penalties }}</td>
                     <td>{{ statistic.yellow_cards }}</td>
                     <td>{{ statistic.red_cards }}</td>
+                    <td><a href="{% url 'player_statistics' statistic.match.id %}">View Match Stats</a></td>
                 </tr>
             {% endfor %}
         </tbody>
