@@ -33,7 +33,12 @@ def register(request):
     return render(request, 'register.html', {'form': form})
 
 def index(request):
-    return render(request, 'index.html')
+    if request.user.is_authenticated:
+        player = request.user.player
+        player_stats = PlayerStatistic.objects.filter(player=player)
+        return render(request, 'index.html', {'player': player, 'player_stats': player_stats})
+    else:
+        return render(request, 'index.html')
 
 def matches(request):
     user_team = request.user.team

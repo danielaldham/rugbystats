@@ -9,6 +9,21 @@
             <p>You are a Coach</p>
         {% else %}
             <p>You are a Player</p>
+            <h3>Player Statistics</h3>
+            {% if player %}
+                <p>Average tackles made per game: {{ player.tackles_made }}</p>
+                <p>Average rucks hit per game: {{ player.rucks_hit }}</p>
+                <p>Average passes per game: {{ player.passes }}</p>
+                <p>Average carries per game: {{ player.carries }}</p>
+                <p>Average tackles missed per game: {{ player.tackles_missed }}</p>
+                <p>Average tries per game: {{ player.tries }}</p>
+                <p>Average conversions per game: {{ player.conversions }}</p>
+                <p>Average penalties per game: {{ player.penalties }}</p>
+                <p>Average yellow cards per game: {{ player.yellow_cards }}</p>
+                <p>Average red cards per game: {{ player.red_cards }}</p>
+            {% else %}
+                <p>No statistics found.</p>
+            {% endif %}
         {% endif %}
     {% else %}
         <p>You are not logged in.</p>
@@ -23,5 +38,4 @@
         {% endfor %}
     </ul>
 {% endif %}
-
 {% endblock %}
