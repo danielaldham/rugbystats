@@ -3,8 +3,6 @@ from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
-
-
 class Team(models.Model):
     name = models.CharField(max_length=30)
     invite_code = models.CharField(max_length=10, null=True, blank=True)
@@ -50,9 +48,6 @@ class MyUser(AbstractUser):
     @property
     def is_coach(self):
         return self.coach
-
-
-
 
 class Match(models.Model):
     home_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='home_matches')
