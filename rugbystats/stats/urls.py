@@ -12,4 +12,5 @@ urlpatterns = [
     path('add_match/', views.add_match, name='add_match'),
     path('join/', views.join_team, name='join'),
     path('match_stats/<int:match_id>/', views.player_statistics, name='player_statistics'),
+    path('about/', views.about, name='about'),
 ]
