@@ -141,3 +141,6 @@ def player_statistics(request, match_id):
     match = Match.objects.get(id=match_id)
     statistics = PlayerStatistic.objects.filter(match=match)
     return render(request, 'player_statistics.html', {'statistics': statistics, 'match': match})
+
+def about(request):
+    return render('about.html')
