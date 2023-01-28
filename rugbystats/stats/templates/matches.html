@@ -2,7 +2,7 @@
 
 {% block content %}
 {% if matches %}
-  <table class="table">
+  <table class="table" id="matches">
     <thead>
       <tr>
         <th>Home Team</th>
@@ -27,5 +27,15 @@
 {% else %}
   <p>No matches found. You can join a team using the Join Team link above.</p>
 {% endif %}
+
+<script>
+  $(document).ready( function () {
+      $('#matches').DataTable({
+          "paging": false, 
+          "lengthChange": false, 
+          "searching": true
+      });
+});
+</script>
 
 {% endblock %}
