@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django_filters.views import FilterView
 
 from django import forms
@@ -54,10 +54,30 @@ def matches(request):
 
 
 def squad_stats(request):
-    team = Team.objects.get(user=request.user)
-    players = Player.objects.filter(team=team)
-    context = {'players': players}
-    return render(request, 'squad_stats.html', context)
+    user_team = request.user.team
+    players = Player.objects.filter(team=user_team)
+    stats = PlayerStatistic.objects.filter(player__in=players)
+    squad_stats = {}
+    for player in players:
+        player_stats = stats.filter(player=player)
+        squad_stats[player] = {
+            'tackles_made': player_stats.aggregate(Sum('tackles_made'))['tackles_made__sum'] or 0,
+            'rucks_hit': player_stats.aggregate(Sum('rucks_hit'))['rucks_hit__sum'] or 0,
+            'passes': player_stats.aggregate(Sum('passes'))['passes__sum'] or 0,
+            'carries': player_stats.aggregate(Sum('carries'))['carries__sum'] or 0,
+            'tackles_missed': player_stats.aggregate(Sum('tackles_missed'))['tackles_missed__sum'] or 0,
+            'tries': player_stats.aggregate(Sum('tries'))['tries__sum'] or 0,
+            'conversions': player_stats.aggregate(Sum('conversions'))['conversions__sum'] or 0,
+            'penalties': player_stats.aggregate(Sum('penalties'))['penalties__sum'] or 0,
+            'yellow_cards': player_stats.aggregate(Sum('yellow_cards'))['yellow_cards__sum'] or 0,
+            'red_cards': player_stats.aggregate(Sum('red_cards'))['red_cards__sum'] or 0,
+        }
+    top_tacklers = sorted(squad_stats.items(), key=lambda x: x[1]['tackles_made'], reverse=True)[:3]
+    top_tries = sorted(squad_stats.items(), key=lambda x: x[1]['tries'], reverse=True)[:3]
+    top_passes = sorted(squad_stats.items(), key=lambda x: x[1]['passes'], reverse=True)[:3]
+    top_tacklers = sorted(squad_stats.items(), key=lambda x: x[1]['tackles_made'], reverse=True)[:3]
+    top_rucks = sorted(squad_stats.items(), key=lambda x: x[1]['rucks_hit'], reverse=True)[:3]
+    return render(request, 'squad_stats.html', {'squad_stats': squad_stats, 'top_tacklers': top_tacklers, 'top_tries': top_tries, 'top_passes': top_passes, 'top_rucks': top_rucks})
 
 def login_view(request):
     if request.method == 'POST':

@@ -2,28 +2,113 @@
 
 {% block content %}
 <div class="container">
+    <h2>Top Players</h2>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <tr>
+                  <th>Top Tacklers</th>
+                  <th>Tackles Made</th>
+                </tr>
+                {% for i in top_tacklers %}
+                <tr {% if forloop.first %}class="h4"{% elif forloop.counter == 2 %}class="h5"{% else %}class="h6"{% endif %}>
+                    <td>{{ i.0.full_name }}</td>
+                    <td>{{ i.1.tackles_made }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col">
+            <table class="table">
+                <tr>
+                  <th>Top Tries</th>
+                  <th>Tries Scored</th>
+                </tr>
+                {% for i in top_tries %}
+                <tr {% if forloop.first %}class="h4"{% elif forloop.counter == 2 %}class="h5"{% else %}class="h6"{% endif %}>
+                    <td>{{ i.0.full_name }}</td>
+                  <td>{{ i.1.tries }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col">
+            <table class="table">
+                <tr>
+                  <th>Top Passes</th>
+                  <th>Passes Made</th>
+                </tr>
+                {% for i in top_passes %}
+                <tr {% if forloop.first %}class="h4"{% elif forloop.counter == 2 %}class="h5"{% else %}class="h6"{% endif %}>
+                    <td>{{ i.0.full_name }}</td>
+                  <td>{{ i.1.passes }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col">
+            <table class="table">
+                <tr>
+                  <th>Top Carries</th>
+                  <th>Carries Made</th>
+                </tr>
+                {% for i in top_tacklers %}
+                <tr {% if forloop.first %}class="h4"{% elif forloop.counter == 2 %}class="h5"{% else %}class="h6"{% endif %}>
+                    <td>{{ i.0.full_name }}</td>
+                  <td>{{ i.1.carries }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <table class="table">
+                <tr>
+                  <th>Top Rucks</th>
+                  <th>Rucks Hit</th>
+                </tr>
+                {% for i in top_rucks %}
+                <tr {% if forloop.first %}class="h4"{% elif forloop.counter == 2 %}class="h5"{% else %}class="h6"{% endif %}>
+                    <td>{{ i.0.full_name }}</td>
+                  <td>{{ i.1.rucks_hit }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
     <h2>Squad Stats</h2>
     <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Height</th>
-                <th>Weight</th>
-                <th>Age</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for player in players %}
-            <tr>
-                <td>{{ player.name }}</td>
-                <td>{{ player.position }}</td>
-                <td>{{ player.height }}</td>
-                <td>{{ player.weight }}</td>
-                <td>{{ player.age }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+        <tr>
+            <th>Player</th>
+            <th>Tackles Made</th>
+            <th>Rucks Hit</th>
+            <th>Passes</th>
+            <th>Carries</th>
+            <th>Tackles Missed</th>
+            <th>Tries</th>
+            <th>Conversions</th>
+            <th>Penalties</th>
+            <th>Yellow Cards</th>
+            <th>Red Cards</th>
+        </tr>
+        {% for player, stats in squad_stats.items %}
+        <tr>
+            <td>{{ player.full_name }}</td>
+            <td>{{ stats.tackles_made }}</td>
+            <td>{{ stats.rucks_hit }}</td>
+            <td>{{ stats.passes }}</td>
+            <td>{{ stats.carries }}</td>
+            <td>{{ stats.tackles_missed }}</td>
+            <td>{{ stats.tries }}</td>
+            <td>{{ stats.conversions }}</td>
+            <td>{{ stats.penalties }}</td>
+            <td>{{ stats.yellow_cards }}</td>
+            <td>{{ stats.red_cards }}</td>
+        </tr>
+        {% endfor %}
     </table>
+    
 </div>
 {% endblock %}
