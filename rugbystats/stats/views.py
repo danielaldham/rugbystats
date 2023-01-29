@@ -143,4 +143,4 @@ def player_statistics(request, match_id):
     return render(request, 'player_statistics.html', {'statistics': statistics, 'match': match})
 
 def about(request):
-    return render('about.html')
+    return render(request, 'about.html')
