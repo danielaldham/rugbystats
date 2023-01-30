@@ -27,6 +27,9 @@ def register(request):
         password = request.POST['password']
         password2 = request.POST['password2']
         
+        if len(password) < 8:
+            return render(request, 'register.html', {'error': 'Password must be at least 8 characters'})
+
         if password == password2:
             if MyUser.objects.filter(username=username).exists():
                 return render(request, 'register.html', {'error': 'Username already taken'})
