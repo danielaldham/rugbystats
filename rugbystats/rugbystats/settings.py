@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'stats',
-    'django.templatetags.static',
 ]
 
 AUTH_USER_MODEL = 'stats.MyUser'
