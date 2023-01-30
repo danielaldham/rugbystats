@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    
     {% if user.is_authenticated %}
         {% if user.team %}
+        <div class="container">
             <h3>Your Statistics</h3>
             {% if statistics %}
                 <table class="table" id="stats">
@@ -50,6 +52,7 @@
             <p>You are not a member of a team yet.</p>
             <a href="{% url 'join' %}">Join a team</a>
         {% endif %}
+    </div>
     {% else %}
     <div class="container col-xl-10 col-xxl-8 px-4 py-5">
         <div class="row align-items-center g-lg-5 py-5">

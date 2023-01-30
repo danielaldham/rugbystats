@@ -1,0 +1,9 @@
+.col-md-3 {
+    flex: 0 0 auto;
+    background-color: blue;
+}
+
+.col-md-3 {
+    flex: 0 0 auto;
+    width: 25%;
+}
