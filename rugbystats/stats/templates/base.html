@@ -28,7 +28,15 @@
             
         
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and user.team and user.is_coach %}
+            <li><a href="{% url 'matches' %}" class="nav-link px-2 link-dark">Matches</a></li>
+            <li><a href="{% url 'squad' %}" class="nav-link px-2 link-dark">Squad Stats</a></li>
+            <li><a href="{% url 'add_players' %}" class="nav-link px-2 link-dark">Add Players</a></li>
+            <li><a href="{% url 'add_match' %}" class="nav-link px-2 link-dark">Add Match</a></li>
+            {% elif user.is_authenticated and user.team %}
+            <li><a href="{% url 'matches' %}" class="nav-link px-2 link-dark">Matches</a></li>
+            <li><a href="{% url 'squad' %}" class="nav-link px-2 link-dark">Squad Stats</a></li>
+            {% elif user.is_authenticated %}
             <li><a href="{% url 'matches' %}" class="nav-link px-2 link-dark">Matches</a></li>
             <li><a href="{% url 'squad' %}" class="nav-link px-2 link-dark">Squad Stats</a></li>
             <li><a href="{% url 'join' %}" class="nav-link px-2 link-dark">Join Team</a></li>
@@ -36,10 +44,10 @@
             <li><a href="{% url 'about' %}" class="nav-link px-2 link-dark">About</a></li>
             
             {% endif %}
-            {% if user.is_authenticated and user.is_coach %}
+            <!-- {% if user.is_authenticated and user.is_coach %}
             <li><a href="{% url 'add_players' %}" class="nav-link px-2 link-dark">Add Players</a></li>
             <li><a href="{% url 'add_match' %}" class="nav-link px-2 link-dark">Add Match</a></li>
-            {% endif %}
+            {% endif %} -->
           </ul>
 
 

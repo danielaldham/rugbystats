@@ -154,7 +154,7 @@ def join_team(request):
             team = Team.objects.get(invite_code=invite_code)
             request.user.team = team
             request.user.save()
-            messages.success(request, 'You have successfully joined the team.')
+            messages.success(request, f'You have successfully joined {team.name}')
             return redirect('index')
         except Team.DoesNotExist:
             messages.error(request, 'Invalid invite code. Please try again.')

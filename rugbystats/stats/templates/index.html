@@ -2,6 +2,16 @@
 
 {% block content %}
     
+{% if messages %}
+<div class="container">
+    <ul class="messages list-unstyled">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
     {% if user.is_authenticated %}
         {% if user.team %}
         <div class="container">
@@ -84,13 +94,7 @@
       </div>
     {% endif %}
 
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
+
 
 <script>
     $(document).ready( function () {
