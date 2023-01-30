@@ -21,15 +21,25 @@ class MyRegistrationForm(UserCreationForm):
 
 def register(request):
     if request.method == 'POST':
-        form = MyRegistrationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            user.save()
-            login(request, user)
-            return redirect('index')
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        username = request.POST['username']
+        password = request.POST['password']
+        password2 = request.POST['password2']
+        
+        if password == password2:
+            if MyUser.objects.filter(username=username).exists():
+                return render(request, 'register.html', {'error': 'Username already taken'})
+            else:
+                user = MyUser.objects.create_user(username=username, password=password, first_name=first_name, last_name=last_name)
+                user.save()
+                login(request, user)
+                return redirect('index')
+        else:
+            return render(request, 'register.html', {'error': 'Passwords do not match'})
     else:
-        form = MyRegistrationForm()
-    return render(request, 'register.html', {'form': form})
+        return render(request, 'register.html')
+
 
 def index(request):
     if request.method == 'POST':
@@ -154,3 +164,11 @@ def player_statistics(request, match_id):
 
 def about(request):
     return render(request, 'about.html')
+
+def register_test(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        password = request.POST['password']
+        password1 = request.POST['password1']
