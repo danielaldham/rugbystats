@@ -80,7 +80,7 @@
                 {% if user.is_authenticated %}
                     <a class="nav-link" href="{% url 'index' %}">{{ user.team.name }}</a>
                 {% else %}
-                    <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    <a class="nav-link" href="{% url 'index' %}">Rugby Dashboard</a>
                 {% endif %}
             </div>
             
