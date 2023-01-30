@@ -24,7 +24,6 @@ def register(request):
         form = MyRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user.coach = form.cleaned_data.get('coach')
             user.save()
             login(request, user)
             return redirect('index')
@@ -33,17 +32,28 @@ def register(request):
     return render(request, 'register.html', {'form': form})
 
 def index(request):
-    if request.user.is_authenticated:
-        try:
-            player = request.user.player
-            statistics = PlayerStatistic.objects.filter(player=player)
-            context = {'statistics': statistics}
-            return render(request, 'index.html', context)
-        except Player.DoesNotExist:
-            context = {'message': 'You are not associated with a player. Please contact your coach to connect your account.'}
-            return render(request, 'index.html', context)
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            return render(request, 'login.html', {'error': 'Invalid login credentials'})
     else:
-        return render(request, 'index.html')
+        if request.user.is_authenticated:
+            try:
+                player = request.user.player
+                statistics = PlayerStatistic.objects.filter(player=player)
+                context = {'statistics': statistics}
+                return render(request, 'index.html', context)
+            except Player.DoesNotExist:
+                context = {'message': 'You are not associated with a player. Please contact your coach to connect your account.'}
+                return render(request, 'index.html', context)
+        else:
+            return render(request, 'index.html')
+    
 
 
 
