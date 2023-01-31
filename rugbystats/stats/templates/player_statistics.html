@@ -4,6 +4,9 @@
 
 
 <div class="container">
+
+
+
 <table class="table" id="player_statistics">
   <thead>
       <tr>
@@ -21,7 +24,7 @@
         <th>Red Cards</th>
       </tr>
     </thead>
-{% for stat in statistics %}
+{% for stat in player_statistics %}
   <tr>
       <td>{{ stat.player.full_name }}</td>
       <td>{{ stat.started }}</td>

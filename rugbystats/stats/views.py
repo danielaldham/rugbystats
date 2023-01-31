@@ -9,7 +9,7 @@ from django import forms
 
 from .forms import AddMatchForm, AddPlayerForm
 
-from .models import MyUser, Match, Team, Player, PlayerStatistic
+from .models import MyUser, Match, Team, Player, PlayerStatistic, MatchStatistics
 
 # Create your views here.
 class MyRegistrationForm(UserCreationForm):
@@ -160,8 +160,9 @@ def join_team(request):
 
 def player_statistics(request, match_id):
     match = Match.objects.get(id=match_id)
-    statistics = PlayerStatistic.objects.filter(match=match)
-    return render(request, 'player_statistics.html', {'statistics': statistics, 'match': match})
+    player_statistics = PlayerStatistic.objects.filter(match=match)
+    match_statistics = MatchStatistics.objects.filter(match=match)
+    return render(request, 'player_statistics.html', {'player_statistics': player_statistics, 'match': match, 'match_statistics': match_statistics})
 
 def about(request):
     return render(request, 'about.html')
