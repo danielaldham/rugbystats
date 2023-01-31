@@ -68,8 +68,6 @@ def index(request):
             return render(request, 'index.html')
     
 
-
-
 def matches(request):
     user_team = request.user.team
     matches = Match.objects.filter(Q(home_team=user_team) | Q(away_team=user_team))

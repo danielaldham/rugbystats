@@ -10,7 +10,7 @@ class AddPlayerForm(forms.ModelForm):
 class AddMatchForm(forms.ModelForm):
     class Meta:
         model = Match
-        fields = ['home_team', 'away_team', 'date', 'home_score', 'away_score']
+        fields = ['home_team', 'away_team', 'date', 'home_score', 'away_score', 'result']
 
 
 class MatchStatisticForm(forms.ModelForm):

@@ -10,6 +10,7 @@
         <th>Away Team</th>
         <th>Date</th>
         <th>Score</th>
+        <th>Result</th>
         <th>Stats Available</th>
       </tr>
     </thead>
@@ -19,7 +20,8 @@
           <td>{{ match.home_team }}</td>
           <td>{{ match.away_team }}</td>
           <td>{{ match.date }}</td>
-          <td>{{ match.home_score }} - {{ match.away_score }}</td>
+          <td class="{% if match.result == 'Win' %}text-success{% elif match.result == 'Loss' %}text-danger{% else %}text-muted{% endif %}">{{ match.home_score }} - {{ match.away_score }}</td>
+          <td>{{ match.result }}</td>
           <td><a href="{% url 'player_statistics' match.id %}">View statistics</a></td>
         </tr>
       {% endfor %}

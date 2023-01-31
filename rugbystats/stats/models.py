@@ -57,12 +57,19 @@ class Match(models.Model):
     date = models.DateField()
     home_score = models.IntegerField(default=0)
     away_score = models.IntegerField(default=0)
+    RESULT_CHOICES = [
+        ('Win', 'Win'),
+        ('Loss', 'Loss'),
+        ('Draw', 'Draw')
+    ]
+    result = models.CharField(max_length=4, choices=RESULT_CHOICES, default='Draw')
 
     def __str__(self):
         return f'{self.home_team} vs {self.away_team}'
     
     def match_name(self):
         return f"{self.home_team.name} vs {self.away_team.name}"
+
 
 
 class PlayerStatistic(models.Model):
@@ -82,3 +89,14 @@ class PlayerStatistic(models.Model):
 
     def __str__(self):
         return f'{self.player.full_name()} - {self.match.home_team} vs {self.match.away_team} on {self.match.date}'
+
+class MatchStatistics(models.Model):
+    match = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='match_statistics')
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    tries_scored = models.IntegerField(default=0)
+    tries_conceded = models.IntegerField(default=0)
+    scrums_won = models.IntegerField(default=0)
+    scrums_lost = models.IntegerField(default=0)
+    lineouts_won = models.IntegerField(default=0)
+    lineouts_lost = models.IntegerField(default=0)
+    motm = models.ForeignKey(Player, on_delete=models.CASCADE)
