@@ -5,41 +5,70 @@
 
 <div class="container">
 
-<table class="table" id="player_statistics">
-  <thead>
+  <h2>Player Statistics for {{ match.home_team }} vs {{ match.away_team }}</h2>
+  <table class="table">
+    <thead>
       <tr>
-        <th>Name</th>
-        <th>Started</th>
-        <th>Tackles Made</th>
-        <th>Tackles Missed</th>
-        <th>Rucks hit</th>
-        <th>Passes</th>
-        <th>Carries</th>
-        <th>Tries</th>
-        <th>Conversions</th>
-        <th>Penalties</th>
-        <th>Yellow Cards</th>
-        <th>Red Cards</th>
+        <th>Team</th>
+        <th>Tries Scored</th>
+        <th>Tries Conceded</th>
+        <th>Scrums Won</th>
+        <th>Scrums Lost</th>
+        <th>Lineouts Won</th>
+        <th>Lineouts Lost</th>
+        <th>Man of the Match</th>
       </tr>
     </thead>
-{% for stat in player_statistics %}
-  <tr>
-      <td>{{ stat.player.full_name }}</td>
-      <td>{{ stat.started }}</td>
-      <td>{{ stat.tackles_made }}</td>
-      <td>{{ stat.tackles_missed }}</td>
-      <td>{{ stat.rucks_hit }}</td>
-      <td>{{ stat.passes }}</td>
-      <td>{{ stat.carries }}</td>
-      <td>{{ stat.tries }}</td>
-      <td>{{ stat.conversions }}</td>
-      <td>{{ stat.penalties }}</td>
-      <td>{{ stat.yellow_cards }}</td>
-      <td>{{ stat.red_cards }}</td>
-  </tr>
-{% endfor %}
-</table>
-</div>
+    <tbody>
+      {% for match_stat in match_statistics %}
+      <tr>
+        <td>{{ match_stat.team.name }}</td>
+        <td>{{ match_stat.tries_scored }}</td>
+        <td>{{ match_stat.tries_conceded }}</td>
+        <td>{{ match_stat.scrums_won }}</td>
+        <td>{{ match_stat.scrums_lost }}</td>
+        <td>{{ match_stat.lineouts_won }}</td>
+        <td>{{ match_stat.lineouts_lost }}</td>
+        <td>{{ match_stat.motm.full_name }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+
+  <table class="table" id="player_statistics">
+      <tr>
+          <th>Player Name</th>
+          <th>Started</th>
+          <th>Tackles Made</th>
+          <th>Rucks Hit</th>
+          <th>Passes</th>
+          <th>Carries</th>
+          <th>Tackles Missed</th>
+          <th>Tries</th>
+          <th>Conversions</th>
+          <th>Penalties</th>
+          <th>Yellow Cards</th>
+          <th>Red Cards</th>
+      </tr>
+      {% for player_stat in player_statistics %}
+          <tr>
+              <td>{{ player_stat.player.full_name }}</td>
+              <td>{{ player_stat.started }}</td>
+              <td>{{ player_stat.tackles_made }}</td>
+              <td>{{ player_stat.rucks_hit }}</td>
+              <td>{{ player_stat.passes }}</td>
+              <td>{{ player_stat.carries }}</td>
+              <td>{{ player_stat.tackles_missed }}</td>
+              <td>{{ player_stat.tries }}</td>
+              <td>{{ player_stat.conversions }}</td>
+              <td>{{ player_stat.penalties }}</td>
+              <td>{{ player_stat.yellow_cards }}</td>
+              <td>{{ player_stat.red_cards }}</td>
+          </tr>
+      {% endfor %}
+  </table>
+  
 
 <script>
   $(document).ready( function () {
