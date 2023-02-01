@@ -139,7 +139,7 @@
   const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels : ['AVG Passes', 'AVG Carries', 'AVG Rucks', 'AVG Tackles', 'Tackles Missed'],
+        labels : ['AVG Passes', 'AVG Carries', 'AVG Rucks', 'AVG Tackles Made', 'AVG Tackles Missed'],
           datasets: [{
             label: "Average Player Stats",
             data : [{{ player_averages.avg_passes }}, {{ player_averages.avg_carries }}, {{ player_averages.avg_rucks }}, {{ player_averages.avg_tackles }}, {{ player_averages.avg_tackles_missed }}],
