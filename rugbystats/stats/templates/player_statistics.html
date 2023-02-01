@@ -37,6 +37,7 @@
   
 
   <table class="table" id="player_statistics">
+    <thead>
       <tr>
           <th>Player Name</th>
           <th>Started</th>
@@ -51,6 +52,8 @@
           <th>Yellow Cards</th>
           <th>Red Cards</th>
       </tr>
+    </thead>
+    <tbody>
       {% for player_stat in player_statistics %}
           <tr>
               <td>{{ player_stat.player.full_name }}</td>
@@ -67,6 +70,7 @@
               <td>{{ player_stat.red_cards }}</td>
           </tr>
       {% endfor %}
+    </tbody>
   </table>
   
 
