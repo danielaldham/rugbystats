@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.db.models import Q, Sum
+from django.db.models import Q, Sum, Count
 from django_filters.views import FilterView
 
 from django import forms
@@ -59,7 +59,19 @@ def index(request):
             try:
                 player = request.user.player
                 statistics = PlayerStatistic.objects.filter(player=player)
-                context = {'statistics': statistics}
+                aggregate_data = statistics.aggregate(
+                    avg_tackles= Sum('tackles_made') / Count('tackles_made'),
+                    avg_carries=Sum('carries') / Count('carries'),
+                    avg_passes=Sum('passes') / Count('passes'),
+                    count = Count('tackles_made')
+                )
+                player_averages = {
+                    'matches_played': aggregate_data['count'],
+                    'avg_tackles': aggregate_data['avg_tackles'],
+                    'avg_carries': aggregate_data['avg_carries'],
+                    'avg_passes': aggregate_data['avg_passes'],
+                }
+                context = {'statistics': statistics, 'player_averages': player_averages}
                 return render(request, 'index.html', context)
             except Player.DoesNotExist:
                 context = {'message': 'You are not associated with a player. Please contact your coach to connect your account.'}

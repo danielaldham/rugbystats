@@ -80,7 +80,8 @@
 </div>
 <div class="container">
     <h2>Squad Stats</h2>
-    <table class="table id="player_statistics"">
+    <table class="table" id="player_statistics">    
+    <thead>
         <tr>
             <th>Player</th>
             <th>Tackles Made</th>
@@ -94,6 +95,8 @@
             <th>Yellow Cards</th>
             <th>Red Cards</th>
         </tr>
+    </thead>
+    <tbody>
         {% for player, stats in squad_stats.items %}
         <tr>
             <td>{{ player.full_name }}</td>
@@ -109,6 +112,7 @@
             <td>{{ stats.red_cards }}</td>
         </tr>
         {% endfor %}
+        </tbody>
     </table>
     
 </div>
@@ -122,5 +126,5 @@
         });
   });
   </script>
-  
+
 {% endblock %}

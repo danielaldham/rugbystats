@@ -17,6 +17,26 @@
         <div class="container">
             <h3>Your Statistics</h3>
             {% if statistics %}
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Matches Played</th>
+                  <th>AVG Passes</th>
+                  <th>AVG Tackles</th>
+                  <th>AVG Carries</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ player_averages.matches_played }}</td>
+                  <td>{{ player_averages.avg_passes }}</td>
+                  <td>{{ player_averages.avg_tackles }}</td>
+                  <td>{{ player_averages.avg_carries }}</td>
+                </tr>
+              </tbody>
+            </table>
+
                 <table class="table" id="stats">
                     <thead>
                         <tr>
