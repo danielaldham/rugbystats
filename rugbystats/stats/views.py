@@ -63,13 +63,17 @@ def index(request):
                     avg_tackles= Sum('tackles_made') / Count('tackles_made'),
                     avg_carries=Sum('carries') / Count('carries'),
                     avg_passes=Sum('passes') / Count('passes'),
-                    count = Count('tackles_made')
+                    count = Count('tackles_made'),
+                    avg_rucks = Sum('rucks_hit') / Count('rucks_hit'),
+                    avg_tackles_missed = Sum('tackles_missed') / Count('tackles_missed')
                 )
                 player_averages = {
                     'matches_played': aggregate_data['count'],
                     'avg_tackles': aggregate_data['avg_tackles'],
                     'avg_carries': aggregate_data['avg_carries'],
                     'avg_passes': aggregate_data['avg_passes'],
+                    'avg_rucks': aggregate_data['avg_rucks'],
+                    'avg_tackles_missed': aggregate_data['avg_tackles_missed'],
                 }
                 context = {'statistics': statistics, 'player_averages': player_averages}
                 return render(request, 'index.html', context)

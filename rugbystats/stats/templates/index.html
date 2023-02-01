@@ -27,16 +27,20 @@
                 <tr>
                   <th>Matches Played</th>
                   <th>AVG Passes</th>
-                  <th>AVG Tackles</th>
                   <th>AVG Carries</th>
+                  <th>AVG Rucks Hit</th>
+                  <th>AVG Tackles Made</th>
+                  <th>AVG Tackels Missed</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>{{ player_averages.matches_played }}</td>
                   <td>{{ player_averages.avg_passes }}</td>
-                  <td>{{ player_averages.avg_tackles }}</td>
                   <td>{{ player_averages.avg_carries }}</td>
+                  <td>{{ player_averages.avg_rucks }}</td>
+                  <td>{{ player_averages.avg_tackles }}</td>
+                  <td>{{ player_averages.avg_tackles_missed }}</td>
                 </tr>
               </tbody>
             </table>
@@ -135,10 +139,10 @@
   const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels : ['AVG Passes', 'AVG Carries', 'AVG Tackles'],
+        labels : ['AVG Passes', 'AVG Carries', 'AVG Rucks', 'AVG Tackles', 'Tackles Missed'],
           datasets: [{
             label: "Average Player Stats",
-            data : [{{ player_averages.avg_passes }}, {{ player_averages.avg_carries }}, {{ player_averages.avg_tackles }}],
+            data : [{{ player_averages.avg_passes }}, {{ player_averages.avg_carries }}, {{ player_averages.avg_rucks }}, {{ player_averages.avg_tackles }}, {{ player_averages.avg_tackles_missed }}],
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
