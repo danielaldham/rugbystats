@@ -167,10 +167,3 @@ def player_statistics(request, match_id):
 def about(request):
     return render(request, 'about.html')
 
-def register_test(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        password = request.POST['password']
-        password1 = request.POST['password1']
