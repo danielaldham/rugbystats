@@ -96,9 +96,9 @@ def squad_stats(request):
     top_tacklers = sorted(squad_stats.items(), key=lambda x: x[1]['tackles_made'], reverse=True)[:3]
     top_tries = sorted(squad_stats.items(), key=lambda x: x[1]['tries'], reverse=True)[:3]
     top_passes = sorted(squad_stats.items(), key=lambda x: x[1]['passes'], reverse=True)[:3]
-    top_tacklers = sorted(squad_stats.items(), key=lambda x: x[1]['tackles_made'], reverse=True)[:3]
+    top_carries = sorted(squad_stats.items(), key=lambda x: x[1]['carries'], reverse=True)[:3]
     top_rucks = sorted(squad_stats.items(), key=lambda x: x[1]['rucks_hit'], reverse=True)[:3]
-    return render(request, 'squad_stats.html', {'squad_stats': squad_stats, 'top_tacklers': top_tacklers, 'top_tries': top_tries, 'top_passes': top_passes, 'top_rucks': top_rucks})
+    return render(request, 'squad_stats.html', {'squad_stats': squad_stats, 'top_tacklers': top_tacklers, 'top_tries': top_tries, 'top_passes': top_passes, 'top_rucks': top_rucks, 'top_carries': top_carries})
 
 def login_view(request):
     if request.method == 'POST':

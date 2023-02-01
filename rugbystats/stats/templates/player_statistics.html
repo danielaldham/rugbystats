@@ -5,11 +5,10 @@
 
 <div class="container">
 
-  <h2>Player Statistics for {{ match.home_team }} vs {{ match.away_team }}</h2>
+  <h2>Match Statistics for {{ match.home_team }} vs {{ match.away_team }}</h2>
   <table class="table">
     <thead>
       <tr>
-        <th>Team</th>
         <th>Tries Scored</th>
         <th>Tries Conceded</th>
         <th>Scrums Won</th>
@@ -22,7 +21,6 @@
     <tbody>
       {% for match_stat in match_statistics %}
       <tr>
-        <td>{{ match_stat.team.name }}</td>
         <td>{{ match_stat.tries_scored }}</td>
         <td>{{ match_stat.tries_conceded }}</td>
         <td>{{ match_stat.scrums_won }}</td>

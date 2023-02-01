@@ -52,7 +52,7 @@
                   <th>Top Carries</th>
                   <th>Carries Made</th>
                 </tr>
-                {% for i in top_tacklers %}
+                {% for i in top_carries %}
                 <tr {% if forloop.first %}class="h4"{% elif forloop.counter == 2 %}class="h5"{% else %}class="h6"{% endif %}>
                     <td>{{ i.0.full_name }}</td>
                   <td>{{ i.1.carries }}</td>
@@ -80,7 +80,7 @@
 </div>
 <div class="container">
     <h2>Squad Stats</h2>
-    <table class="table">
+    <table class="table id="player_statistics"">
         <tr>
             <th>Player</th>
             <th>Tackles Made</th>
@@ -112,4 +112,15 @@
     </table>
     
 </div>
+
+<script>
+    $(document).ready( function () {
+        $('#player_statistics').DataTable({
+            "paging": false, 
+            "lengthChange": false, 
+            "searching": true
+        });
+  });
+  </script>
+  
 {% endblock %}
